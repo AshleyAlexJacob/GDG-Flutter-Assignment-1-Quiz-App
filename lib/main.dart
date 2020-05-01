@@ -21,13 +21,16 @@ class _QuizAppState extends State<QuizApp> {
     setState(() {
       int z = questionBank.lastQuestion();
       if (z == 0) {
-        Alert(
-                context: context,
-                title: 'Quiz Finished',
-                desc: 'We are'
-                    'Restarting')
-            .show();
-        iconContent.clear();
+        Duration threeSeconds = Duration(seconds:5);
+        Future.delayed(threeSeconds,(){
+          Alert(
+              context: context,
+              title: 'Quiz Finished',
+              desc: 'We are'
+                  'Restarting').show();
+          iconContent=[];
+        });
+
       } else if (res == true) {
         iconContent.add(
           Icon(

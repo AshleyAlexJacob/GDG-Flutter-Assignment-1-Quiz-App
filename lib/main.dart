@@ -21,16 +21,25 @@ class _QuizAppState extends State<QuizApp> {
     setState(() {
       int z = questionBank.lastQuestion();
       if (z == 0) {
-        Duration threeSeconds = Duration(seconds:5);
-        Future.delayed(threeSeconds,(){
-          Alert(
-              context: context,
-              title: 'Quiz Finished',
-              desc: 'We are'
-                  'Restarting').show();
-          iconContent=[];
-        });
-
+        Alert(
+            context: context,
+            title: 'Finished',
+            desc: 'You have reached at the end of the quiz',
+            buttons: [
+              DialogButton(
+                color: Colors.amber,
+                child: Text(
+                  'Restart',
+                  style: TextStyle(
+                      fontSize: 25.0
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context),
+              )
+            ]
+        ).show();
+        iconContent = [];
+        questionBank.resetQuestions();
       } else if (res == true) {
         iconContent.add(
           Icon(
@@ -123,30 +132,3 @@ class _QuizAppState extends State<QuizApp> {
     );
   }
 }
-
-//
-//showDialog(
-//context: context,
-//barrierDismissible: false,
-//builder: (BuildContext context) {
-//return AlertDialog(
-//title: Text("🎉 Quiz Completed 🎉"),
-//content: Text("Your score is $correct"),
-//shape: RoundedRectangleBorder(
-//borderRadius: BorderRadius.circular(5.0),
-//),
-//actions: <Widget>[
-//_getRaisedButton(
-//text: "Try again?",
-//color: Colors.green,
-//function: () {
-//setState(() {
-//iconList.clear();
-//count = 0;
-//correct = 0;
-//Navigator.pop(context);
-//});
-//}),
-//],
-//);
-//
